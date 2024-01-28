@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/makstyshkul.github.io/pokedex/static/css/main.e6c13ad2.css",
+    "main.js": "/makstyshkul.github.io/pokedex/static/js/main.c6aacf75.js",
+    "static/js/787.9caf3a70.chunk.js": "/makstyshkul.github.io/pokedex/static/js/787.9caf3a70.chunk.js",
+    "index.html": "/makstyshkul.github.io/pokedex/index.html",
+    "main.e6c13ad2.css.map": "/makstyshkul.github.io/pokedex/static/css/main.e6c13ad2.css.map",
+    "main.c6aacf75.js.map": "/makstyshkul.github.io/pokedex/static/js/main.c6aacf75.js.map",
+    "787.9caf3a70.chunk.js.map": "/makstyshkul.github.io/pokedex/static/js/787.9caf3a70.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.c6aacf75.js"
+  ]
+}
