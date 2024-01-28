@@ -4,7 +4,7 @@
 
 1. Open your terminal or command prompt and navigate to the directory where you want to clone the repository. Then, run the following command:
 ```shell
-git clone https://github.com/makstyshkul/pokedexx.git
+git clone https://github.com/makstyshkul/pokedex.git
 ```
 2. Install Dependencies:
 ***For root directory:***
@@ -16,9 +16,9 @@ or
 ```shell
 yarn install
 ```
-***For tt-pokedex directory:***
+***For pokedexx directory:***
 ```shell
-cd tt-pokedex
+cd pokedexx
 npm install
 ```
 or
@@ -26,9 +26,9 @@ or
 yarn install
 ```
 ## Run projects
-Go to the tt-pokedex directory:
+Go to the pokedexx directory:
 ```shell
-cd tt-pokedex
+cd pokedexx
 npm start
 ```
 or
