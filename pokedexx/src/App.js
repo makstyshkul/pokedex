@@ -15,6 +15,7 @@ function App() {
 	const [selectedPokemon, setSelectedPokemon] = React.useState(null);
 	const [isModalOpen, setIsModalOpen] = React.useState(false);
 	const [selectedType, setSelectedType] = React.useState(null);
+	const [loading, setLoading] = React.useState(false);
 
 
 	React.useEffect(() => {
@@ -45,32 +46,45 @@ function App() {
 	}, []);
 
 	const handleShowCards = () => {
-		axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${showCards + 3}`)
-			.then(data => {
-				const newPokedexData = data.data.results.slice(showCards).map(item => ({
-					name: item.name,
-				}));
 
-				const newPromises = data.data.results.slice(showCards).map(url =>
-					axios.get(url.url)
-						.then(data => ({
-							name: newPokedexData.find(item => item.name === url.name).name,
-							src: data.data.sprites.front_default,
-							types: data.data.types.map(item => item.type.name),
-							statsName: [...data.data.stats.map(item => item.stat.name), 'weight', 'total moves'],
-							stats: [...data.data.stats.map(item => item.base_stat), data.data.weight, data.data.moves.length],
-							id: data.data.id
-						}))
-				);
+		if (!loading) {
 
-				Promise.all(newPromises)
-					.then(newImages => {
-						setPokedexData(prevData => [...prevData, ...newImages]);
-						setShowCards(prevCount => prevCount + 3);
-					})
-					.catch(error => console.error(error));
-			})
-			.catch(error => console.error(error));
+			setLoading(true);
+
+			axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${showCards + 3}`)
+				.then(data => {
+					const newPokedexData = data.data.results.slice(showCards).map(item => ({
+						name: item.name,
+					}));
+
+					const newPromises = data.data.results.slice(showCards).map(url =>
+						axios.get(url.url)
+							.then(data => ({
+								name: newPokedexData.find(item => item.name === url.name).name,
+								src: data.data.sprites.front_default,
+								types: data.data.types.map(item => item.type.name),
+								statsName: [...data.data.stats.map(item => item.stat.name), 'weight', 'total moves'],
+								stats: [...data.data.stats.map(item => item.base_stat), data.data.weight, data.data.moves.length],
+								id: data.data.id
+							}))
+					);
+
+					Promise.all(newPromises)
+						.then(newImages => {
+							setPokedexData(prevData => [...prevData, ...newImages]);
+							setShowCards(prevCount => prevCount + 3);
+							setLoading(false);
+						})
+						.catch(error => {
+							console.error(error);
+							setLoading(false);
+						})
+				})
+				.catch(error => {
+					console.error(error);
+					setLoading(false);
+				});
+		}
 	};
 
 	const handleCardClick = (pokemon) => {
